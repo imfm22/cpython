@@ -84,6 +84,9 @@ whose size is determined when the object is allocated.
     { _PyObject_EXTRA_INIT              \
     1, type },
 
+// 定义一个 PyVarObject 类型的头部
+// 即 PyVarObject => { {1, type}, size}
+// 其中 PyObject => {1, type}
 #define PyVarObject_HEAD_INIT(type, size)       \
     { PyObject_HEAD_INIT(type) size },
 
@@ -102,8 +105,8 @@ whose size is determined when the object is allocated.
  * in addition, be cast to PyVarObject*.
  */
 typedef struct _object {
-    _PyObject_HEAD_EXTRA
-    Py_ssize_t ob_refcnt;
+    _PyObject_HEAD_EXTRA // 未定义 Py_TRACE_REFS 时，下列宏定义为空
+    Py_ssize_t ob_refcnt; // Py_ssize_t: x86_64 Linux => long int
     struct _typeobject *ob_type;
 } PyObject;
 

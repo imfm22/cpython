@@ -191,13 +191,14 @@ typedef struct _typeobject {
 
     /* Method suites for standard classes */
 
-    PyNumberMethods *tp_as_number;
-    PySequenceMethods *tp_as_sequence;
-    PyMappingMethods *tp_as_mapping;
+    // 鸭子类型
+    PyNumberMethods *tp_as_number; // i.e. int
+    PySequenceMethods *tp_as_sequence; // i.e. list
+    PyMappingMethods *tp_as_mapping; // i.e. dict
 
     /* More standard operations (here for binary compatibility) */
 
-    hashfunc tp_hash;
+    hashfunc tp_hash; // 对于该类型对象，生成 hash 值的方法
     ternaryfunc tp_call;
     reprfunc tp_str;
     getattrofunc tp_getattro;
@@ -238,9 +239,9 @@ typedef struct _typeobject {
     descrgetfunc tp_descr_get;
     descrsetfunc tp_descr_set;
     Py_ssize_t tp_dictoffset;
-    initproc tp_init;
+    initproc tp_init; // 初始化实例对象
     allocfunc tp_alloc;
-    newfunc tp_new;
+    newfunc tp_new; // 创建实例对象
     freefunc tp_free; /* Low-level free-memory routine */
     inquiry tp_is_gc; /* For PyObject_IS_GC */
     PyObject *tp_bases;
